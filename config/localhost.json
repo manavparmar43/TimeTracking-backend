@@ -1,0 +1,46 @@
+{
+  "port": 3001,
+  "isSwagger": true,
+  "postgres": "postgres://postgres:root@localhost:5432/activity_tracker",
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "PLG3Jy7ERukwe7QI8MZpEw8vO6Y=",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+    "oauth": {
+      "redirect": "/",
+      "google": {
+        "key": "<google oauth key>",
+        "secret": "<google oauth secret>",
+        "scope": [
+          "email",
+          "profile",
+          "openid"
+        ]
+      }
+    }
+  },
+  "smtp": {
+    "service": "mailtrap",
+    "host": "smtp.mailtrap.io",
+    "port": 2525,
+    "user": "7e2b67fd5d30a5",
+    "pass": "78cd0005f44d51"
+  }
+}

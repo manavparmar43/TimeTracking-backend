@@ -1,0 +1,2609 @@
+{
+	"info": {
+		"_postman_id": "8d82a335-e021-4068-8ab4-1972da07331a",
+		"name": "Activity-Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28763968",
+		"_collection_link": "https://bold-station-769775.postman.co/workspace/Activity-Tracker~4535d758-9265-47b4-afb4-fb0484b03f51/collection/28764805-8d82a335-e021-4068-8ab4-1972da07331a?action=share&source=collection_link&creator=28763968"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Create User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"email\": \"tobor@gmail.com\",\n        \"password\": \"ASD123!@#\",\n        \"role\": \"member\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/users",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var json = pm.response.json();",
+											"pm.collectionVariables.set(\"jwt_admin\", json.data.accessToken);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"admin@solguruz.com\",\n    \"password\": \"ASD123!@#\",\n    \"strategy\": \"local\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/authentication",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"authentication"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "My Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/users/profile/me",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/users/c04b4453-acc0-4113-91ac-20d1efefee54",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users",
+										"c04b4453-acc0-4113-91ac-20d1efefee54"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit User Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"tobor@gmail.com\",\n    \"password\": \"ASD123!@#\",\n    \"role\": \"member\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/users/c04b4453-acc0-4113-91ac-20d1efefee54",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"users",
+										"c04b4453-acc0-4113-91ac-20d1efefee54"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/users/eecc290c-5320-4a33-8f92-1e8d27caf5dc",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"users",
+										"eecc290c-5320-4a33-8f92-1e8d27caf5dc"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Lookup",
+					"item": [
+						{
+							"name": "Add Lookup",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"label\": \"technology\",\n        \"key\": \"flutter\",\n        \"value\": \"Flutter\"\n    },\n    {\n        \"label\": \"technology\",\n        \"key\": \"react\",\n        \"value\": \"React\"\n    },\n    {\n        \"label\": \"technology\",\n        \"key\": \"angular\",\n        \"value\": \"Angular\"\n    },\n    {\n        \"label\": \"technology\",\n        \"key\": \"mern\",\n        \"value\": \"MERN\"\n    },\n    {\n        \"label\": \"technology\",\n        \"key\": \"mean\",\n        \"value\": \"MEAN\"\n    },\n    {\n        \"label\": \"technology\",\n        \"key\": \"node\",\n        \"value\": \"Node JS\"\n    },\n    {\n        \"label\": \"technology\",\n        \"key\": \"python\",\n        \"value\": \"Python\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/lookup",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"lookup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Job Dropdown",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/lookup?label=job&$select[]=id&$select[]=value",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"lookup"
+									],
+									"query": [
+										{
+											"key": "label",
+											"value": "job"
+										},
+										{
+											"key": "$select[]",
+											"value": "id"
+										},
+										{
+											"key": "$select[]",
+											"value": "value"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Technology Dropdown",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/lookup?label=technology&$select[]=id&$select[]=value",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"lookup"
+									],
+									"query": [
+										{
+											"key": "label",
+											"value": "technology"
+										},
+										{
+											"key": "$select[]",
+											"value": "id"
+										},
+										{
+											"key": "$select[]",
+											"value": "value"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Project",
+					"item": [
+						{
+							"name": "Create Project",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Prime leaf\",\n    \"is_internal\": true\n    // \"fk_client\": \"01aabaa1-bcf9-449b-9ec9-a7a6ca028b84\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/project",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"project"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Project List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/project?$select[]=id&$select[]=name&$limit=-1",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"project"
+									],
+									"query": [
+										{
+											"key": "$select[]",
+											"value": "id"
+										},
+										{
+											"key": "$select[]",
+											"value": "name"
+										},
+										{
+											"key": "$limit",
+											"value": "-1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Project",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"HK\",\n    \"is_internal\": true,\n    \"fk_clients\": \"01aabaa1-bcf9-449b-9ec9-a7a6ca028b84\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/project/120f011b-80e0-4c48-80e9-a498221531ca",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"project",
+										"120f011b-80e0-4c48-80e9-a498221531ca"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Project",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/project/a038fde3-9446-40e0-909a-2524f58d13ac",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"project",
+										"a038fde3-9446-40e0-909a-2524f58d13ac"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Project Member",
+					"item": [
+						{
+							"name": "Get All Members By Project Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/project-member?fk_project=c1263e73-b8b5-4e7c-bdb4-bb891e985f93",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"project-member"
+									],
+									"query": [
+										{
+											"key": "fk_project",
+											"value": "c1263e73-b8b5-4e7c-bdb4-bb891e985f93"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Project By Member",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/project-member?fk_user=39647f9b-a13d-44c9-a5c8-5af01acd526e",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"project-member"
+									],
+									"query": [
+										{
+											"key": "fk_user",
+											"value": "39647f9b-a13d-44c9-a5c8-5af01acd526e"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Member To Project",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"fk_project\": \"f0c70346-a648-475e-aee0-da6dc01b23c8\",\n        \"fk_user\": \"39647f9b-a13d-44c9-a5c8-5af01acd526e\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/project-member",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"project-member"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Member From Project",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/project-member/81395533-8597-4242-9642-b1cb1d4d1c78",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"project-member",
+										"81395533-8597-4242-9642-b1cb1d4d1c78"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All User With Member Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/users?role=member&$select[]=id&$select[]=email",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "role",
+											"value": "member"
+										},
+										{
+											"key": "$select[]",
+											"value": "id"
+										},
+										{
+											"key": "$select[]",
+											"value": "email"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Client",
+					"item": [
+						{
+							"name": "Add Client",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Savan\",\n    \"contact\": \"123\",\n    \"email\": \"savan.solguruz@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/client",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"client"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Client",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/client",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"client"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Client Detail By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/client/5e3c2045-068d-40ec-ac5b-11e1905b55f8",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"client",
+										"5e3c2045-068d-40ec-ac5b-11e1905b55f8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Client Details",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Ankit Kabira\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/client/01aabaa1-bcf9-449b-9ec9-a7a6ca028b84",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"client",
+										"01aabaa1-bcf9-449b-9ec9-a7a6ca028b84"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Client",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Dhaval\",\n    \"contact\": \"123\",\n    \"email\": \"dhavalv.solguruz@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/client/5e3c2045-068d-40ec-ac5b-11e1905b55f8",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"client",
+										"5e3c2045-068d-40ec-ac5b-11e1905b55f8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Todo",
+					"item": [
+						{
+							"name": "Create Todo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Logo Design\",\n    \"fk_project\": \"cf601487-f54d-48db-bca6-fcfb93122dde\",\n    \"fk_user\": \"603c969d-a9b9-4c3b-8836-0028e13d5850\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/todo",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"todo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Todos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/todo?fk_project=c1263e73-b8b5-4e7c-bdb4-bb891e985f93&fk_user=c04b4453-acc0-4113-91ac-20d1efefee54",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"todo"
+									],
+									"query": [
+										{
+											"key": "fk_project",
+											"value": "c1263e73-b8b5-4e7c-bdb4-bb891e985f93"
+										},
+										{
+											"key": "fk_user",
+											"value": "c04b4453-acc0-4113-91ac-20d1efefee54"
+										},
+										{
+											"key": "is_completed",
+											"value": "true",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Todo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Hello World! 2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/todo/2bf355ae-bf42-42e9-bef9-b2b7cb9b286c",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"todo",
+										"2bf355ae-bf42-42e9-bef9-b2b7cb9b286c"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark As Completed",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"isCompleted\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/todo/2bf355ae-bf42-42e9-bef9-b2b7cb9b286c",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"todo",
+										"2bf355ae-bf42-42e9-bef9-b2b7cb9b286c"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Analysis",
+					"item": [
+						{
+							"name": "Get Analysis With Screenshot",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/analysis?fk_user={{fk_user}}",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"analysis"
+									],
+									"query": [
+										{
+											"key": "start_date",
+											"value": "2023-04-25",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2023-04-25",
+											"disabled": true
+										},
+										{
+											"key": "fk_user",
+											"value": "{{fk_user}}"
+										},
+										{
+											"key": "fk_project",
+											"value": "567edbf8-50dd-4485-aee9-8d803a71f8c9",
+											"disabled": true
+										},
+										{
+											"key": "$limit",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "$skip",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "min_activity_percentage",
+											"value": "50",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Time Chart for project",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=project&start_date=2023-04-24",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "project"
+										},
+										{
+											"key": "fk_user",
+											"value": "f88b756d-8415-478a-8d82-18b0404da932",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2023-04-24"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-04-27",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Total Time Spent on day",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/widgets?widget_name=day&fk_user=c04b4453-acc0-4113-91ac-20d1efefee54",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "day"
+										},
+										{
+											"key": "fk_user",
+											"value": "c04b4453-acc0-4113-91ac-20d1efefee54"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-04-26",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2023-08-21",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Timesheet",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=timesheet&start_date=2023-04-24&end_date=2023-04-27&fk_project=cf601487-f54d-48db-bca6-fcfb93122dde",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "timesheet"
+										},
+										{
+											"key": "fk_user",
+											"value": "f88b756d-8415-478a-8d82-18b0404da932",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2023-04-24"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-04-27"
+										},
+										{
+											"key": "fk_project",
+											"value": "cf601487-f54d-48db-bca6-fcfb93122dde"
+										},
+										{
+											"key": "$limit",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "$skip",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Screens And Urls",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=screen&start_date=2023-04-23&end_date=2023-04-24&$limit=5&$skip=0&fk_user=f88b756d-8415-478a-8d82-18b0404da932",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "screen"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-04-23"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-04-24"
+										},
+										{
+											"key": "$limit",
+											"value": "5"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "fk_user",
+											"value": "f88b756d-8415-478a-8d82-18b0404da932"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get URL's Visited",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=urls&start_date=2023-05-01&end_date=2023-05-10&$limit=5&$skip=0",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "urls"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-05-01"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-05-10"
+										},
+										{
+											"key": "$limit",
+											"value": "5"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "fk_user",
+											"value": "{{fk_user}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Time Spent By Project",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=time_spent&$limit=10&$skip=0",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "time_spent"
+										},
+										{
+											"key": "$limit",
+											"value": "10"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "fk_user",
+											"value": "{{fk_user}}",
+											"disabled": true
+										},
+										{
+											"key": "fk_project",
+											"value": "ebeed65f-119e-4a76-b819-43de94d5c9f9",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "All Member",
+					"item": [
+						{
+							"name": "Gel All Users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/users/get-users?$limit=10&$skip=0",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"users",
+										"get-users"
+									],
+									"query": [
+										{
+											"key": "$limit",
+											"value": "10"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "search_keyword",
+											"value": "Savan",
+											"disabled": true
+										},
+										{
+											"key": "job",
+											"value": "2bc2b554-870f-4f89-9f7d-5c38769173fc",
+											"disabled": true
+										},
+										{
+											"key": "technology",
+											"value": "0ff01798-a20c-41ba-b43f-f67f5076df4d",
+											"disabled": true
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"description": "admin / member",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role\": \"member\",\n    \"first_name\": \"Savat\",\n    \"middle_name\": \"Trada\",\n    \"last_name\": \"\",\n    \"job\": null,\n    \"technology\": null,\n    \"email\": \"abcdefdhi@gmail.com\",\n    \"password\": \"ASD123!@#\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/users/87115183-93ba-4848-9a5a-334d342b3d36",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"users",
+										"87115183-93ba-4848-9a5a-334d342b3d36"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CSV",
+					"item": [
+						{
+							"name": "Export CSV",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/export-csv",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"export-csv"
+									],
+									"query": [
+										{
+											"key": "start_date",
+											"value": "2023-04-23",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2023-04-24",
+											"disabled": true
+										},
+										{
+											"key": "fk_user",
+											"value": "f88b756d-8415-478a-8d82-18b0404da932",
+											"disabled": true
+										},
+										{
+											"key": "fk_project",
+											"value": "567edbf8-50dd-4485-aee9-8d803a71f8c9",
+											"disabled": true
+										},
+										{
+											"key": "$limit",
+											"value": "-1",
+											"disabled": true
+										},
+										{
+											"key": "$skip",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "min_activity_percentage",
+											"value": "50",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Download",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt_admin}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/export-csv/download",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"export-csv",
+										"download"
+									],
+									"query": [
+										{
+											"key": "start_date",
+											"value": "2023-04-23",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2023-04-24",
+											"disabled": true
+										},
+										{
+											"key": "fk_user",
+											"value": "f88b756d-8415-478a-8d82-18b0404da932",
+											"disabled": true
+										},
+										{
+											"key": "fk_project",
+											"value": "567edbf8-50dd-4485-aee9-8d803a71f8c9",
+											"disabled": true
+										},
+										{
+											"key": "$limit",
+											"value": "-1",
+											"disabled": true
+										},
+										{
+											"key": "$skip",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "min_activity_percentage",
+											"value": "50",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add Activity Manually",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fk_project",
+									"value": "c1263e73-b8b5-4e7c-bdb4-bb891e985f93",
+									"type": "text"
+								},
+								{
+									"key": "fk_todo",
+									"value": "34d5c7e2-2568-436e-8f87-7534b193d23a",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2023-07-31",
+									"type": "text"
+								},
+								{
+									"key": "start_time",
+									"value": "09:00:00",
+									"type": "text"
+								},
+								{
+									"key": "end_time",
+									"value": "10:00:00",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "01:00:00",
+									"type": "text"
+								},
+								{
+									"key": "idle_time",
+									"value": "00:10:00",
+									"type": "text"
+								},
+								{
+									"key": "screen_activity",
+									"value": "[\n    {\n      \"window_title\": \"mainTwo.py - TimeTrackerBetaP310 - Visual Studio Code\",\n      \"time_entries\": [\n        {\n          \"start_time\": \"2023-04-20 10:03:54UTC+0000\",\n          \"end_time\": \"2023-04-20 10:03:57UTC+0000\"\n        }\n      ],\n      \"time_spent\": 3.053645\n    }]",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "screenshots",
+									"type": "file",
+									"src": "/home/solguruz/Pictures/Profile/Dolfin.png",
+									"disabled": true
+								},
+								{
+									"key": "is_manual",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "fk_user",
+									"value": "c04b4453-acc0-4113-91ac-20d1efefee54",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/activity-log",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"activity-log"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Member",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var json = pm.response.json();",
+											"pm.collectionVariables.set(\"jwt\", json.data.accessToken);",
+											"pm.collectionVariables.set(\"fk_user\", json.data.user.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"yagnik@solguruz.com\", // \"member@gmail.com\",\"nirmal@solguruz.com\",\"aftab@solguruz.com\",\"yagnik@solguruz.com\"\n    \"password\": \"ASD123!@#\",\n    \"strategy\": \"local\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/authentication",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"authentication"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit User Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role\": \"member\",\n    \"first_name\": \"Yagnik\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/users/c04b4453-acc0-4113-91ac-20d1efefee54",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"users",
+										"c04b4453-acc0-4113-91ac-20d1efefee54"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "My Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/users/profile/me",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"users",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Project",
+					"item": [
+						{
+							"name": "Get My Project List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/project/get-my-projects?dashboard=true",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"project",
+										"get-my-projects"
+									],
+									"query": [
+										{
+											"key": "dashboard",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Todo",
+					"item": [
+						{
+							"name": "Create Todo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Depreciation 40\",\n    \"fk_project\": \"f0c70346-a648-475e-aee0-da6dc01b23c8\",\n    \"fk_user\": \"{{fk_user}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/todo",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"todo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Todos By Project",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/todo?fk_user={{fk_user}}",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"todo"
+									],
+									"query": [
+										{
+											"key": "fk_project",
+											"value": "ebeed65f-119e-4a76-b819-43de94d5c9f9",
+											"disabled": true
+										},
+										{
+											"key": "fk_user",
+											"value": "{{fk_user}}"
+										},
+										{
+											"key": "is_completed",
+											"value": "false",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Todo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Hello World! 2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/todo/2bf355ae-bf42-42e9-bef9-b2b7cb9b286c",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"todo",
+										"2bf355ae-bf42-42e9-bef9-b2b7cb9b286c"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark As Completed",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"is_completed\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/todo/f87489da-62cd-474d-b0ef-060dee2cd074",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"todo",
+										"f87489da-62cd-474d-b0ef-060dee2cd074"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Activity Log",
+					"item": [
+						{
+							"name": "Add Activity",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fk_project",
+											"value": "ebeed65f-119e-4a76-b819-43de94d5c9f9",
+											"type": "text"
+										},
+										{
+											"key": "fk_todo",
+											"value": "852cc58c-7fe4-42c8-8ec2-261468e25e15",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "05-09-2023",
+											"type": "text"
+										},
+										{
+											"key": "start_time",
+											"value": "16:00:00",
+											"type": "text"
+										},
+										{
+											"key": "end_time",
+											"value": "17:00:00",
+											"type": "text"
+										},
+										{
+											"key": "duration",
+											"value": "01:00:00",
+											"type": "text"
+										},
+										{
+											"key": "idle_time",
+											"value": "00:10:00",
+											"type": "text"
+										},
+										{
+											"key": "screen_activity",
+											"value": "[\n    {\n      \"window_title\": \"mainTwo.py - TimeTrackerBetaP310 - Visual Studio Code\",\n      \"time_entries\": [\n        {\n          \"start_time\": \"2023-04-20 10:03:54UTC+0000\",\n          \"end_time\": \"2023-04-20 10:03:57UTC+0000\"\n        }\n      ],\n      \"time_spent\": 3.053645\n    }]",
+											"type": "text"
+										},
+										{
+											"key": "screenshots",
+											"type": "file",
+											"src": "/home/solguruz/Pictures/Profile/Dolfin.png",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{localhost}}/activity-log",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"activity-log"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Analysis",
+					"item": [
+						{
+							"name": "Get Analysis With Screenshot",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/analysis?start_date=2023-07-27&end_date=2023-07-27&$limit=-1&min_activity_percentage=0",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"analysis"
+									],
+									"query": [
+										{
+											"key": "start_date",
+											"value": "2023-07-27"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-07-27"
+										},
+										{
+											"key": "fk_project",
+											"value": "ebeed65f-119e-4a76-b819-43de94d5c9f9",
+											"disabled": true
+										},
+										{
+											"key": "$limit",
+											"value": "-1"
+										},
+										{
+											"key": "$skip",
+											"value": "15",
+											"disabled": true
+										},
+										{
+											"key": "min_activity_percentage",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Time Chart for project",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=project&start_date=2023-07-27&end_date=2023-07-31",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "project"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-07-27"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-07-31"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Time Chart for todo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=todo",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "todo"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-07-27",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2023-07-31",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Total Time Spent on day",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=day&start_date=2023-08-09&end_date=2023-08-09&fk_project=9c30f91c-d9b2-4911-8815-ac1f8325f5f1",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "day"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-08-09"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-08-09"
+										},
+										{
+											"key": "fk_project",
+											"value": "9c30f91c-d9b2-4911-8815-ac1f8325f5f1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Timesheet",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=timesheet&start_date=2023-04-25&end_date=2023-04-25&fk_project=ebeed65f-119e-4a76-b819-43de94d5c9f9&$limit=5&$skip=0",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "timesheet"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-04-25"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-04-25"
+										},
+										{
+											"key": "fk_project",
+											"value": "ebeed65f-119e-4a76-b819-43de94d5c9f9"
+										},
+										{
+											"key": "$limit",
+											"value": "5"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Screens And Urls",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=screen&start_date=2023-04-24&end_date=2023-04-24&$limit=5&$skip=0",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "screen"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-04-24"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-04-24"
+										},
+										{
+											"key": "$limit",
+											"value": "5"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get URL's Visited",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=urls&$limit=5&$skip=0",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "urls"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-05-01",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2023-05-10",
+											"disabled": true
+										},
+										{
+											"key": "$limit",
+											"value": "5"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Time Spent By Project",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/widgets?widget_name=time_spent&$limit=10&$skip=0",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"widgets"
+									],
+									"query": [
+										{
+											"key": "widget_name",
+											"value": "time_spent"
+										},
+										{
+											"key": "$limit",
+											"value": "10"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "fk_project",
+											"value": "ebeed65f-119e-4a76-b819-43de94d5c9f9",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "URL's",
+					"item": [
+						{
+							"name": "Add URL's",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"date\": \"08-09-2023\",\n        \"title\": \"Home | Dashboard\",\n        \"domain\": \"solguruz.keka.com\",\n        \"url\": \"https://solguruz.keka.com/#/me/leave\",\n        \"last_visit_time\": \"2023-08-09 08:56:24\",\n        \"duration\": \"00:20:00\",\n        \"browser\": \"chrome\"\n    },\n    {\n        \"date\": \"08-09-2023\",\n        \"title\": \"Me | Attendance | Logs\",\n        \"domain\": \"solguruz.keka.com\",\n        \"url\": \"https://solguruz.keka.com/#/me/attendance/logs\",\n        \"last_visit_time\": \"2023-08-09 08:56:24\",\n        \"duration\": \"00:40:00\",\n        \"browser\": \"chrome\"\n    },\n    {\n        \"date\": \"08-09-2023\",\n        \"title\": \"Continue\",\n        \"domain\": \"login.skype.com\",\n        \"url\": \"https://login.skype.com/login/oauth/microsoft?client_id=572381&partner=999&redirect_uri=https://web.skype.com/Auth%2FPostHandler%3FopenPstnPage%3Dtrue&state=249a60ff-b002-4d15-a500-7a5c1e9508e5\",\n        \"last_visit_time\": \"2023-08-09 08:56:24\",\n        \"duration\": \"00:30:00\",\n        \"browser\": \"chrome\"\n    },\n    {\n        \"date\": \"08-09-2023\",\n        \"title\": \"Signing in to Skype, please wait\",\n        \"domain\": \"login.skype.com\",\n        \"url\": \"https://login.skype.com/login/microsoft?client_id=572381&redirect_uri=https%3A%2F%2Fweb.skype.com%2FAuth%2FPostHandler%3FopenPstnPage%3Dtrue&state=249a60ff-b002-4d15-a500-7a5c1e9508e5\",\n        \"last_visit_time\": \"2023-08-09 08:51:27\",\n        \"duration\": \"00:30:00\",\n        \"browser\": \"chrome\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/urls",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"urls"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "https://timer.solz.me",
+			"type": "string"
+		},
+		{
+			"key": "jwt",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "jwt_admin",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "fk_user",
+			"value": ""
+		},
+		{
+			"key": "local",
+			"value": "https://timer.solz.me",
+			"type": "string"
+		}
+	]
+}

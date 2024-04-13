@@ -1,0 +1,23 @@
+{
+  "localhost": {
+    "username": "postgres",
+    "password": "solguruz123",
+    "database": "activity_tracker",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "development": {
+    "username": "postgres",
+    "password": "balar4022",
+    "database": "activity_tracker",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": null,
+    "database": "activity_tracker",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
